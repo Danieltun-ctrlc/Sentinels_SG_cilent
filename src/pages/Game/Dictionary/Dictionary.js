@@ -4,6 +4,7 @@ import { TYPE_CHART } from '../../../data/typeChart';
 import { MOVES } from '../../../data/moves';
 import { ABILITIES } from '../../../data/abilities';
 import { GLOSSARY } from '../../../data/glossary';
+import { getTypeDisplayName } from '../../../data/typePersonality';
 import './Dictionary.css';
 
 const TYPES = ['logic', 'forensic', 'network', 'armor', 'phantom', 'illusion', 'toxic', 'coercion'];
@@ -14,16 +15,16 @@ const TYPE_COLORS = {
 };
 
 const TYPE_EXPLANATIONS = [
-  { atk: 'forensic', def: 'phantom', mult: '2×', why: 'Forensic investigation exposes phantom scams — verification destroys fake identities.' },
-  { atk: 'network', def: 'coercion', mult: '2×', why: 'Community networks break isolation — coercion fails when victims have support.' },
-  { atk: 'armor', def: 'toxic', mult: '2×', why: 'Strong security defences neutralize toxic harassment — encrypted systems ignore trolls.' },
-  { atk: 'toxic', def: 'logic', mult: '2×', why: 'Emotional manipulation overwhelms logical thinking — outrage bypasses reason.' },
-  { atk: 'coercion', def: 'logic', mult: '2×', why: 'Fear and threats shut down critical thinking — panic overrides logic.' },
-  { atk: 'phantom', def: 'armor', mult: '2×', why: 'Phishing bypasses technical defences by targeting the human, not the system.' },
-  { atk: 'logic', def: 'toxic', mult: '0.5×', why: 'Logic alone struggles against emotional manipulation — trolls feed on rational engagement.' },
-  { atk: 'logic', def: 'coercion', mult: '0.5×', why: 'Reasoning with a coercer is ineffective — they exploit fear, not facts.' },
-  { atk: 'armor', def: 'phantom', mult: '0.5×', why: 'Technical defences miss social engineering — firewalls cannot block a convincing lie.' },
-  { atk: 'network', def: 'coercion', mult: '2×', why: 'Reporting to authorities and community breaks the silence coercion depends on.' },
+  { atk: 'forensic', def: 'phantom', mult: '2×', why: 'The Investigator exposes Phantom scams — verification destroys fake identities.' },
+  { atk: 'network', def: 'coercion', mult: '2×', why: 'The Sentinel breaks isolation — coercion fails when victims have community support.' },
+  { atk: 'armor', def: 'toxic', mult: '2×', why: 'The Guardian blocks toxic manipulation — secured systems with 2FA ignore malware.' },
+  { atk: 'toxic', def: 'logic', mult: '2×', why: 'Emotional manipulation overwhelms The Analyst — outrage bypasses critical thinking.' },
+  { atk: 'coercion', def: 'logic', mult: '2×', why: 'Fear shuts down The Analyst — panic and threats override even methodical minds.' },
+  { atk: 'phantom', def: 'armor', mult: '2×', why: 'Phishing bypasses The Guardian by targeting the human, not the system.' },
+  { atk: 'logic', def: 'toxic', mult: '0.5×', why: 'The Analyst struggles against emotional manipulation — trolls feed on rational engagement.' },
+  { atk: 'logic', def: 'coercion', mult: '0.5×', why: 'The Analyst cannot reason with a coercer — they exploit fear, not facts.' },
+  { atk: 'armor', def: 'phantom', mult: '0.5×', why: 'The Guardian\'s technical defences miss social engineering — firewalls cannot block a convincing lie.' },
+  { atk: 'network', def: 'coercion', mult: '2×', why: 'The Sentinel\'s community reporting breaks the silence coercion depends on.' },
 ];
 
 const TABS = ['TYPE CHART', 'MOVES', 'ABILITIES', 'GLOSSARY'];
@@ -83,14 +84,14 @@ export default function Dictionary() {
                 <tr>
                   <th className="dict__chart-corner">ATK ↓ / DEF →</th>
                   {TYPES.map(t => (
-                    <th key={t} className="dict__chart-th" style={{ color: TYPE_COLORS[t] }}>{t.slice(0, 4).toUpperCase()}</th>
+                    <th key={t} className="dict__chart-th" style={{ color: TYPE_COLORS[t] }}>{getTypeDisplayName(t).slice(0, 6)}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {TYPES.map((atkType, ri) => (
                   <tr key={atkType} style={{ animationDelay: `${ri * 0.05}s` }} className="dict__chart-row">
-                    <td className="dict__chart-label" style={{ color: TYPE_COLORS[atkType] }}>{atkType.toUpperCase()}</td>
+                    <td className="dict__chart-label" style={{ color: TYPE_COLORS[atkType] }}>{getTypeDisplayName(atkType)}</td>
                     {TYPES.map(defType => {
                       const eff = TYPE_CHART[atkType]?.[defType] ?? 1;
                       let cellClass = 'dict__chart-cell';
@@ -115,9 +116,9 @@ export default function Dictionary() {
 
           {hoveredCell && (
             <div className="dict__chart-tooltip animate-fade-in">
-              <span style={{ color: TYPE_COLORS[hoveredCell.atk] }}>{hoveredCell.atk.toUpperCase()}</span>
+              <span style={{ color: TYPE_COLORS[hoveredCell.atk] }}>{getTypeDisplayName(hoveredCell.atk)}</span>
               <span className="dict__tooltip-arrow">→</span>
-              <span style={{ color: TYPE_COLORS[hoveredCell.def] }}>{hoveredCell.def.toUpperCase()}</span>
+              <span style={{ color: TYPE_COLORS[hoveredCell.def] }}>{getTypeDisplayName(hoveredCell.def)}</span>
               <span className="dict__tooltip-mult">= {hoveredCell.eff}×</span>
             </div>
           )}
@@ -130,9 +131,9 @@ export default function Dictionary() {
               {TYPE_EXPLANATIONS.map((exp, i) => (
                 <div key={i} className="dict__explain-card" style={{ animationDelay: `${i * 0.06}s` }}>
                   <div className="dict__explain-matchup">
-                    <span className="dict__explain-type" style={{ color: TYPE_COLORS[exp.atk] }}>{exp.atk.toUpperCase()}</span>
+                    <span className="dict__explain-type" style={{ color: TYPE_COLORS[exp.atk] }}>{getTypeDisplayName(exp.atk)}</span>
                     <span className="dict__explain-arrow">→</span>
-                    <span className="dict__explain-type" style={{ color: TYPE_COLORS[exp.def] }}>{exp.def.toUpperCase()}</span>
+                    <span className="dict__explain-type" style={{ color: TYPE_COLORS[exp.def] }}>{getTypeDisplayName(exp.def)}</span>
                     <span className={`dict__explain-mult ${exp.mult === '2×' ? 'dict__explain-mult--super' : 'dict__explain-mult--resist'}`}>{exp.mult}</span>
                   </div>
                   <p className="dict__explain-why">{exp.why}</p>
@@ -165,7 +166,7 @@ export default function Dictionary() {
                   <span className={`dict__move-cat dict__move-cat--${move.category}`}>{move.category}</span>
                 </div>
                 <div className="dict__move-stats">
-                  <span className="dict__move-type" style={{ color: TYPE_COLORS[move.type] }}>{move.type.toUpperCase()}</span>
+                  <span className="dict__move-type" style={{ color: TYPE_COLORS[move.type] }}>{getTypeDisplayName(move.type)}</span>
                   {move.power > 0 && <span className="dict__move-power">PWR {move.power}</span>}
                   <span className="dict__move-pp">PP {move.pp}</span>
                 </div>

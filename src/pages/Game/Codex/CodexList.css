@@ -185,6 +185,15 @@
   margin-bottom: var(--space-sm);
 }
 
+.codex__featured-philosophy {
+  font-size: 12px;
+  color: var(--color-cyan);
+  font-style: italic;
+  margin-top: var(--space-sm);
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
 .codex__featured-lore {
   font-size: 13px;
   color: var(--color-text-muted);

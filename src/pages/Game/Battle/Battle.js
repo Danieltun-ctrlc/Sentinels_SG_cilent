@@ -703,25 +703,42 @@ export default function Battle() {
               <MoveSelector moves={activePlayer.moves} pp={activePlayer.pp} onSelect={handleMoveSelect} disabled={animating} onHover={setHoveredMove} />
             </div>
             <div className="battle__side-actions">
-              {/* Move info panel — compact */}
+              {/* Move info panel — educational focus */}
               {hoveredMove ? (
-                <div className="battle__move-info battle__move-info--has-move" style={{ '--move-type-color': (() => { const { MOVES } = require('../../../data/moves'); const m = MOVES[hoveredMove]; const tc = { logic: '#00D9FF', forensic: '#10F981', network: '#3B82F6', armor: '#C0C8D6', phantom: '#FF2E63', illusion: '#9333EA', toxic: '#A3E635', coercion: '#F97316' }; return tc[m?.type] || '#00D9FF'; })() }}>
+                <div className="battle__move-info battle__move-info--has-move battle__move-info--visible" style={{ '--move-type-color': (() => { const { MOVES } = require('../../../data/moves'); const m = MOVES[hoveredMove]; const tc = { logic: '#00D9FF', forensic: '#10F981', network: '#3B82F6', armor: '#C0C8D6', phantom: '#FF2E63', illusion: '#9333EA', toxic: '#A3E635', coercion: '#F97316' }; return tc[m?.type] || '#00D9FF'; })() }}>
                   {(() => {
                     const { MOVES } = require('../../../data/moves');
                     const m = MOVES[hoveredMove];
                     if (!m) return null;
                     return (<>
-                      <span className="battle__move-info-name">{m.name}</span>
+                      <div className="battle__move-info-header">
+                        <span className="battle__move-info-name">{m.name}</span>
+                        <span className="battle__move-info-pp">PP {m.pp}</span>
+                      </div>
                       <div className="battle__move-info-badges">
-                        <span className="battle__move-info-type-badge">{m.type.toUpperCase()}</span>
+                        <span className="battle__move-info-type-badge">{(() => { const { getTypeDisplayName } = require('../../../data/typePersonality'); return getTypeDisplayName(m.type); })()}</span>
                         <span className={`battle__move-info-cat-badge battle__move-info-cat-badge--${m.category}`}>
                           {m.category === 'attack' ? '⚔ ATK' : '✦ STS'}
                         </span>
                         {m.power > 0 && <span className="battle__move-info-stat-inline">PWR {m.power}</span>}
-                        <span className="battle__move-info-stat-inline">PP {m.pp}</span>
                       </div>
                       <span className="battle__move-info-desc">{m.description}</span>
-                      {m.realMeaning && <span className="battle__move-info-meaning-text">💡 {m.realMeaning}</span>}
+                      <div className="battle__move-info-divider"></div>
+                      {m.realMeaning && (
+                        <div className="battle__move-info-edu">
+                          <span className="battle__move-info-edu-label">🎓 REAL-WORLD MEANING</span>
+                          <span className="battle__move-info-edu-text">{m.realMeaning}</span>
+                        </div>
+                      )}
+                      {m.defensiveAction && (
+                        <div className="battle__move-info-action">
+                          <span className="battle__move-info-action-label">🛡️ WHAT YOU DO IN REAL LIFE</span>
+                          <span className="battle__move-info-action-text">{m.defensiveAction}</span>
+                        </div>
+                      )}
+                      {m.scamCounter && (
+                        <span className="battle__move-info-counter">⚡ {m.scamCounter}</span>
+                      )}
                     </>);
                   })()}
                 </div>
@@ -729,7 +746,7 @@ export default function Battle() {
                 <div className="battle__move-info battle__move-info--empty">
                   <span className="battle__move-info-hint">HOVER A MOVE<br/>FOR DETAILS</span>
                 </div>
-              )}}
+              )}
               {canSwap(battleState) && (
                 <button className="battle__swap-btn" onClick={async () => {
                   if (animating) return;

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CREATURES } from '../../../data/creatures';
+import { getTypeDisplayName } from '../../../data/typePersonality';
 import gameService from '../../../services/gameService';
 import './CodexList.css';
 
-const DEFENDER_TYPES = ['ALL TYPES', 'LOGIC', 'FORENSIC', 'NETWORK', 'ARMOR'];
+const DEFENDER_TYPES = ['ALL TYPES', 'THE ANALYST', 'THE INVESTIGATOR', 'THE SENTINEL', 'THE GUARDIAN'];
 const ATTACKER_TYPES = ['ALL TYPES', 'PHANTOM', 'ILLUSION', 'TOXIC', 'COERCION'];
 
 const UNLOCK_HINTS = {
@@ -37,7 +38,13 @@ export default function CodexList() {
   const typeOptions = activeTab === 'DEFENDERS' ? DEFENDER_TYPES : ATTACKER_TYPES;
   const filtered = typeFilter === 'ALL TYPES'
     ? displayList
-    : displayList.filter(c => c.type.toUpperCase() === typeFilter);
+    : displayList.filter(c => {
+        // For defenders, compare against personality display name
+        if (activeTab === 'DEFENDERS') {
+          return getTypeDisplayName(c.type).toUpperCase() === typeFilter;
+        }
+        return c.type.toUpperCase() === typeFilter;
+      });
 
   // Reset type filter when switching tabs
   const handleTabChange = (tab) => {
@@ -114,8 +121,11 @@ export default function CodexList() {
             <h3 className="codex__featured-name">{selectedCreature.name.toUpperCase()}</h3>
             <p className="codex__featured-title">{selectedCreature.title}</p>
             <span className={`codex__type-badge codex__type-badge--${selectedCreature.type}`}>
-              {selectedCreature.type.toUpperCase()}
+              {getTypeDisplayName(selectedCreature.type)}
             </span>
+            {selectedCreature.philosophy && (
+              <p className="codex__featured-philosophy">{selectedCreature.philosophy}</p>
+            )}
             <p className="codex__featured-lore">{selectedCreature.lore}</p>
           </div>
         </div>
@@ -143,7 +153,7 @@ export default function CodexList() {
                 {isOwned ? creature.name.toUpperCase() : '??????????'}
               </h4>
               <span className={`codex__type-badge codex__type-badge--${isOwned ? creature.type : 'unknown'}`}>
-                {isOwned ? creature.type.toUpperCase() : 'TYPE: ???'}
+                {isOwned ? getTypeDisplayName(creature.type) : 'TYPE: ???'}
               </span>
               <p className="codex__card-subtitle">
                 {isOwned ? creature.title : (UNLOCK_HINTS[creature.id] || 'Unlock via gameplay')}

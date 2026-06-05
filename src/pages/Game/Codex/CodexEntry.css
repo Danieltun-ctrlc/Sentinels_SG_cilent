@@ -1,0 +1,340 @@
+.codex-entry {
+  padding: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.codex-entry__back {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-cyan);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+/* Hero Banner */
+.codex-entry__hero {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 16px;
+  padding: 20px;
+  background: rgba(5, 8, 17, 0.9);
+  border: 2px solid var(--creature-color);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--creature-color) 30%, transparent);
+}
+
+.codex-entry__hero-sprite {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.codex-entry__hero-sprite img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 6px var(--creature-color));
+}
+
+.codex-entry__hero-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.codex-entry__name {
+  font-family: var(--font-header);
+  font-size: 22px;
+  color: #fff;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 0 0 8px var(--creature-color);
+}
+
+.codex-entry__archetype {
+  font-family: var(--font-header);
+  font-size: 14px;
+  color: var(--creature-color);
+  letter-spacing: 2px;
+  text-shadow: 0 0 6px var(--creature-color);
+}
+
+.codex-entry__archetype--attacker {
+  color: var(--color-magenta);
+}
+
+.codex-entry__archetype-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-muted);
+  letter-spacing: 1px;
+}
+
+.codex-entry__title {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 4px 0 0;
+}
+
+/* Sections */
+.codex-entry__section {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  background: rgba(5, 8, 17, 0.7);
+}
+
+.codex-entry__section--dark {
+  background: rgba(2, 4, 10, 0.9);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.codex-entry__section-title {
+  font-family: var(--font-header);
+  font-size: 10px;
+  color: var(--creature-color);
+  letter-spacing: 2px;
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid color-mix(in srgb, var(--creature-color) 30%, transparent);
+}
+
+.codex-entry__text {
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.codex-entry__text--lore {
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+/* Philosophy */
+.codex-entry__philosophy {
+  text-align: center;
+  border-color: var(--creature-color);
+  box-shadow: inset 0 0 12px color-mix(in srgb, var(--creature-color) 10%, transparent);
+}
+
+.codex-entry__quote {
+  font-family: var(--font-header);
+  font-size: 14px;
+  color: var(--creature-color);
+  font-style: italic;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Personality Traits */
+.codex-entry__traits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.codex-entry__trait {
+  font-size: 13px;
+  color: var(--color-text);
+  padding: 6px 10px;
+  border-left: 3px solid var(--creature-color);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Battle Quotes */
+.codex-entry__quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.codex-entry__quote-bubble {
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  background: rgba(0, 217, 255, 0.03);
+}
+
+.codex-entry__quote-bubble--victory {
+  border-color: var(--color-green);
+  background: rgba(16, 249, 129, 0.03);
+}
+
+.codex-entry__quote-bubble--defeat {
+  border-color: var(--color-red);
+  background: rgba(255, 56, 56, 0.03);
+}
+
+.codex-entry__quote-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--color-text-muted);
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.codex-entry__quote-text {
+  font-size: 13px;
+  color: var(--color-text);
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Defends Against */
+.codex-entry__defends {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.codex-entry__defend-item {
+  font-size: 13px;
+  color: var(--color-text);
+  padding: 4px 0;
+}
+
+/* Real Life Lesson */
+.codex-entry__lesson {
+  border-color: var(--color-amber, #FFB800);
+  background: rgba(255, 184, 0, 0.04);
+  box-shadow: 0 0 10px rgba(255, 184, 0, 0.08);
+}
+
+.codex-entry__lesson .codex-entry__section-title {
+  color: var(--color-amber, #FFB800);
+  border-bottom-color: rgba(255, 184, 0, 0.3);
+}
+
+.codex-entry__advice {
+  font-size: 14px;
+  color: var(--color-amber, #FFB800);
+  line-height: 1.6;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Signature Move */
+.codex-entry__sig-move {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.codex-entry__sig-name {
+  font-family: var(--font-header);
+  font-size: 16px;
+  color: var(--creature-color);
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px var(--creature-color);
+}
+
+.codex-entry__sig-reason {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Stats */
+.codex-entry__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.codex-entry__stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.codex-entry__stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  width: 32px;
+  letter-spacing: 1px;
+}
+
+.codex-entry__stat-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--color-elevated, #1a2333);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.codex-entry__stat-fill {
+  height: 100%;
+  background: var(--creature-color);
+  box-shadow: 0 0 4px var(--creature-color);
+}
+
+.codex-entry__stat-val {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-text);
+  width: 28px;
+  text-align: right;
+}
+
+/* Move Pool */
+.codex-entry__moves {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.codex-entry__move-card {
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  background: rgba(5, 8, 17, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.codex-entry__move-name {
+  font-family: var(--font-header);
+  font-size: 9px;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.codex-entry__move-type {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .codex-entry__hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .codex-entry__hero-sprite {
+    width: 100px;
+    height: 100px;
+  }
+
+  .codex-entry__name {
+    font-size: 16px;
+  }
+
+  .codex-entry__moves {
+    grid-template-columns: 1fr;
+  }
+}

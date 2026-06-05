@@ -94,6 +94,12 @@ export default function BattleSetup() {
                 </div>
                 <div className="battle-setup__info">
                   <span className="battle-setup__name">{def.name}</span>
+                  {def.archetype && (
+                    <span className="battle-setup__archetype">{def.archetype}</span>
+                  )}
+                  {def.philosophy && (
+                    <span className="battle-setup__philosophy">{def.philosophy}</span>
+                  )}
                   <span className="battle-setup__meta">
                     <span className="battle-setup__ability">{ABILITIES[def.abilities.default]?.name || def.abilities.default}</span>
                   </span>

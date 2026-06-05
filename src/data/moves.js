@@ -9,6 +9,8 @@ export const MOVES = {
     pp: 8,
     description: 'Verify a claim against multiple sources.',
     realMeaning: 'Always check claims through the official app or website, never via the SMS link itself.',
+    defensiveAction: 'OPEN THE OFFICIAL APP',
+    scamCounter: 'Defeats phishing links',
   },
   fact_check: {
     id: 'fact_check',
@@ -19,7 +21,9 @@ export const MOVES = {
     pp: 5,
     effect: { target: 'self', stat: 'def', stages: 1 },
     description: 'Reveal one fact about the opponent. Boosts DEF.',
-    realMeaning: 'The single most powerful defense — stop and think before acting on any urgent message.',
+    realMeaning: 'The single most powerful defense — stop and think for 10 seconds before acting on any urgent message. 90% of scams fail when their victim pauses.',
+    defensiveAction: 'PAUSE BEFORE CLICKING',
+    scamCounter: 'Defeats urgency tactics',
   },
   official_app_check: {
     id: 'official_app_check',
@@ -29,7 +33,9 @@ export const MOVES = {
     power: 90,
     pp: 8,
     description: 'Open the official channel instead of trusting the link.',
-    realMeaning: 'Real banks, IRAS, and agencies only verify via their own apps. Never via SMS links.',
+    realMeaning: 'Real banks, IRAS, and government agencies only verify identity through their own official apps. Never via SMS links — those are always phishing.',
+    defensiveAction: 'OPEN THE APP, NOT THE LINK',
+    scamCounter: 'Defeats fake login pages',
   },
   scamshield_banish: {
     id: 'scamshield_banish',
@@ -39,7 +45,9 @@ export const MOVES = {
     power: 100,
     pp: 3,
     description: 'Report to ScamShield. High damage.',
-    realMeaning: 'Report scams via the ScamShield app. Your report protects everyone else.',
+    realMeaning: 'Report scam messages via the ScamShield app. Your report blocks the scammer\'s number for everyone in Singapore.',
+    defensiveAction: 'USE THE SCAMSHIELD APP',
+    scamCounter: 'Defeats repeat scammers',
   },
   deep_research: {
     id: 'deep_research',
@@ -50,7 +58,9 @@ export const MOVES = {
     pp: 5,
     effect: { target: 'self', stat: 'atk', stages: 1 },
     description: 'Boost own Attack by 1 stage.',
-    realMeaning: 'Search for the company, number, or sender before engaging — scams have digital footprints.',
+    realMeaning: 'Search for the company name, phone number, or sender before engaging. Real scams have digital footprints — and so do their victims warning others.',
+    defensiveAction: 'SEARCH FIRST',
+    scamCounter: 'Defeats fake businesses',
   },
   logical_refute: {
     id: 'logical_refute',
@@ -60,7 +70,9 @@ export const MOVES = {
     power: 60,
     pp: 10,
     description: 'Counter manipulation with a second opinion. Moderate damage.',
-    realMeaning: 'Scammers want you isolated. Asking a family member breaks the spell — but they may not know the technical signs of phishing either. Effective, but not the strongest counter.',
+    realMeaning: 'Scammers isolate their victims. A second opinion from family or friends breaks the manipulation and exposes the scam.',
+    defensiveAction: 'ASK SOMEONE YOU TRUST',
+    scamCounter: 'Defeats isolation tactics',
   },
   vpn_shield: {
     id: 'vpn_shield',
@@ -71,7 +83,9 @@ export const MOVES = {
     pp: 3,
     effect: { target: 'self', stat: 'def', stages: 2 },
     description: 'Sharply boost DEF for 2 turns.',
-    realMeaning: 'Hide your digital footprint on untrusted networks — scammers cannot target what they cannot see.',
+    realMeaning: 'Hide your digital footprint on untrusted networks. Scammers can\'t target what they can\'t see.',
+    defensiveAction: 'USE A VPN ON PUBLIC WIFI',
+    scamCounter: 'Defeats data harvesting',
   },
   firewall: {
     id: 'firewall',
@@ -82,7 +96,9 @@ export const MOVES = {
     pp: 5,
     effect: { target: 'self', stat: 'def', stages: 2 },
     description: 'Sharply raise Defence.',
-    realMeaning: 'Verify every request, every time. Trust nothing by default — not even familiar names.',
+    realMeaning: 'Verify every request, every time. Trust nothing by default — not even familiar names or sender IDs. Scammers exploit assumed trust.',
+    defensiveAction: 'TRUST NOTHING BY DEFAULT',
+    scamCounter: 'Defeats sender ID spoofing',
   },
   encryption_shield: {
     id: 'encryption_shield',
@@ -92,7 +108,9 @@ export const MOVES = {
     power: 65,
     pp: 10,
     description: 'Encrypt and counter-attack.',
-    realMeaning: 'Two-factor authentication blocks 99% of account takeover attempts.',
+    realMeaning: 'Two-factor authentication blocks 99% of account takeover attempts. Even if scammers get your password, they can\'t log in without your second factor.',
+    defensiveAction: 'TURN ON 2FA EVERYWHERE',
+    scamCounter: 'Defeats credential theft',
   },
   patch_update: {
     id: 'patch_update',
@@ -103,7 +121,9 @@ export const MOVES = {
     pp: 5,
     effect: { target: 'self', stat: 'def', stages: 1 },
     description: 'Apply security patch. Boost DEF.',
-    realMeaning: 'Update your apps and OS regularly to close known security holes scammers exploit.',
+    realMeaning: 'Update your apps and operating system regularly. Scammers exploit known security holes that already have fixes available.',
+    defensiveAction: 'KEEP YOUR APPS UPDATED',
+    scamCounter: 'Defeats malware exploits',
   },
   lockdown: {
     id: 'lockdown',
@@ -113,7 +133,9 @@ export const MOVES = {
     power: 85,
     pp: 5,
     description: 'Lock all access points and strike.',
-    realMeaning: 'DBS and OCBC Money Lock feature ring-fences your savings from unauthorized transfers.',
+    realMeaning: 'DBS and OCBC\'s Money Lock feature ring-fences your savings from unauthorized transfers. Activate it in your banking app today.',
+    defensiveAction: 'ENABLE MONEY LOCK',
+    scamCounter: 'Defeats unauthorized transfers',
   },
   community_alert: {
     id: 'community_alert',
@@ -123,7 +145,9 @@ export const MOVES = {
     power: 75,
     pp: 8,
     description: 'Alert the community. Deals network damage.',
-    realMeaning: 'Tell your WhatsApp groups, family chats, neighbors. Awareness spreads protection.',
+    realMeaning: 'Tell your WhatsApp groups, family chats, and neighbors. Awareness spreads protection — herd immunity for scams.',
+    defensiveAction: 'WARN YOUR COMMUNITY',
+    scamCounter: 'Defeats viral scam waves',
   },
   expose_weakness: {
     id: 'expose_weakness',
@@ -134,7 +158,9 @@ export const MOVES = {
     pp: 5,
     effect: { target: 'enemy', stat: 'def', stages: -1 },
     description: 'Analyse the attacker and expose a vulnerability. Lowers enemy DEF.',
-    realMeaning: 'Identify and publicise the scammer\'s weak points to help others.',
+    realMeaning: 'Identify and publicise the scammer\'s weak points to help others avoid the same trap.',
+    defensiveAction: 'EXPOSE THE PATTERN',
+    scamCounter: 'Defeats hidden scam tactics',
   },
   // --- NEW DEFENDER MOVES ---
   source_verify: {
@@ -145,7 +171,9 @@ export const MOVES = {
     power: 95,
     pp: 5,
     description: 'Verify the source with overwhelming evidence. High logic damage.',
-    realMeaning: 'Real Singapore government sites end in .gov.sg. Anything else is fake.',
+    realMeaning: 'Real Singapore government sites end in .gov.sg. Anything else — .gov.sg.tk, .gov-sg.com — is fake.',
+    defensiveAction: 'CHECK THE DOMAIN',
+    scamCounter: 'Defeats fake government sites',
   },
   critical_analysis: {
     id: 'critical_analysis',
@@ -156,7 +184,9 @@ export const MOVES = {
     pp: 3,
     effect: { target: 'self', stat: 'atk', stages: 2 },
     description: 'Sharply boost ATK through deep analysis.',
-    realMeaning: 'All scams follow patterns: urgency + authority + action. Recognise the formula.',
+    realMeaning: 'All scams follow patterns: urgency + authority + action. Recognise the formula and you become immune.',
+    defensiveAction: 'SPOT THE FORMULA',
+    scamCounter: 'Defeats all scam templates',
   },
   two_factor_auth: {
     id: 'two_factor_auth',
@@ -167,7 +197,9 @@ export const MOVES = {
     pp: 3,
     effect: { target: 'self', stat: 'spd', stages: 1 },
     description: 'Enable 2FA. Boost SPD.',
-    realMeaning: 'One-Time Passwords add a critical verification layer that scammers cannot bypass.',
+    realMeaning: 'One-Time Passwords add a critical verification layer that scammers cannot bypass remotely.',
+    defensiveAction: 'ENABLE OTP NOW',
+    scamCounter: 'Defeats remote account takeover',
   },
   data_wipe: {
     id: 'data_wipe',
@@ -177,7 +209,9 @@ export const MOVES = {
     power: 110,
     pp: 3,
     description: 'Wipe compromised data. Devastating armor strike.',
-    realMeaning: 'If your phone is compromised, remote-wipe protects your banking data.',
+    realMeaning: 'If your phone is compromised, remote-wipe protects your banking data from being extracted.',
+    defensiveAction: 'WIPE IF COMPROMISED',
+    scamCounter: 'Defeats data extraction malware',
   },
   reverse_trace: {
     id: 'reverse_trace',
@@ -188,7 +222,9 @@ export const MOVES = {
     pp: 6,
     statusInflict: 'DOXXED',
     description: 'Trace the attacker. May inflict DOXXED.',
-    realMeaning: 'Digital forensics can identify scammers — every online action leaves a trail.',
+    realMeaning: 'Digital forensics can identify scammers — every online action leaves a trail for authorities.',
+    defensiveAction: 'HELP SPF TRACE THEM',
+    scamCounter: 'Defeats anonymous scammers',
   },
   bandwidth_surge: {
     id: 'bandwidth_surge',
@@ -198,7 +234,9 @@ export const MOVES = {
     power: 90,
     pp: 5,
     description: 'Overwhelm with network traffic. High damage.',
-    realMeaning: 'Flooding scam infrastructure with reports takes scam sites down faster.',
+    realMeaning: 'Flooding scam infrastructure with reports takes scam sites down faster for everyone.',
+    defensiveAction: 'REPORT EN MASSE',
+    scamCounter: 'Defeats scam infrastructure',
   },
   speed_patch: {
     id: 'speed_patch',
@@ -210,6 +248,8 @@ export const MOVES = {
     effect: { target: 'self', stat: 'spd', stages: 2 },
     description: 'Sharply boost SPD with optimised routing.',
     realMeaning: 'Report scams within minutes — the faster you act, the more money banks can recover.',
+    defensiveAction: 'ACT WITHIN MINUTES',
+    scamCounter: 'Defeats time-sensitive theft',
   },
   debunk_blast: {
     id: 'debunk_blast',
@@ -221,6 +261,8 @@ export const MOVES = {
     statusInflict: 'DECEIVED',
     description: 'Blast misinformation apart. May inflict DECEIVED.',
     realMeaning: 'Cross-reference suspicious claims with official sources before believing them.',
+    defensiveAction: 'VERIFY BEFORE BELIEVING',
+    scamCounter: 'Defeats misinformation',
   },
   incident_report: {
     id: 'incident_report',
@@ -231,7 +273,9 @@ export const MOVES = {
     pp: 5,
     effect: { target: 'enemy', stat: 'atk', stages: -1 },
     description: 'File an incident report. Lowers enemy ATK.',
-    realMeaning: 'Official reports help SPF build cases and recover stolen funds.',
+    realMeaning: 'Official police reports help SPF build cases and recover stolen funds.',
+    defensiveAction: 'FILE A REPORT',
+    scamCounter: 'Defeats unprosecuted scammers',
   },
   honeypot_trap: {
     id: 'honeypot_trap',
@@ -243,6 +287,8 @@ export const MOVES = {
     effect: { target: 'enemy', stat: 'spd', stages: -2 },
     description: 'Set a honeypot. Sharply lowers enemy SPD.',
     realMeaning: 'Lure attackers into monitored traps to identify and shut them down.',
+    defensiveAction: 'WASTE THEIR TIME',
+    scamCounter: 'Defeats active scam operations',
   },
   mass_warn: {
     id: 'mass_warn',
@@ -252,7 +298,9 @@ export const MOVES = {
     power: 85,
     pp: 5,
     description: 'Broadcast warning to all. High network damage.',
-    realMeaning: 'Singapore\'s 24/7 Anti-Scam Hotline. If you are unsure, just call.',
+    realMeaning: 'Singapore\'s 24/7 Anti-Scam Hotline. If you\'re unsure about any message or call, just dial 1799 — free, fast, always available.',
+    defensiveAction: 'CALL 1799',
+    scamCounter: 'Defeats decision pressure',
   },
   trace_route: {
     id: 'trace_route',
@@ -262,7 +310,9 @@ export const MOVES = {
     power: 75,
     pp: 8,
     description: 'Trace the attacker back to source.',
-    realMeaning: 'Hover over links before clicking. .gov.sg is real; .gov.sg.tk is fake.',
+    realMeaning: 'Hover over links before clicking. .gov.sg is real; .gov.sg.tk is fake. Scammers use lookalike domains.',
+    defensiveAction: 'INSPECT EVERY LINK',
+    scamCounter: 'Defeats lookalike domains',
   },
   metadata_scan: {
     id: 'metadata_scan',
@@ -273,7 +323,9 @@ export const MOVES = {
     pp: 5,
     effect: { target: 'self', stat: 'atk', stages: 1 },
     description: 'Scan metadata. Boost ATK.',
-    realMeaning: 'Check sender IDs against IMDA official Sender ID Registry to spot spoofs.',
+    realMeaning: 'Check sender IDs against IMDA\'s official Sender ID Registry. Scammers spoof IDs like \'IRAS\' or \'OCBC\' — but the registry never lies.',
+    defensiveAction: 'CHECK THE SENDER ID',
+    scamCounter: 'Defeats sender spoofing',
   },
   audit_log: {
     id: 'audit_log',
@@ -283,7 +335,9 @@ export const MOVES = {
     power: 70,
     pp: 10,
     description: 'Review the audit trail and strike.',
-    realMeaning: 'Review transactions regularly. Catch unauthorized charges within 24 hours.',
+    realMeaning: 'Review your transactions regularly. Catch unauthorized charges within 24 hours when banks can still reverse them.',
+    defensiveAction: 'AUDIT YOUR ACCOUNTS WEEKLY',
+    scamCounter: 'Defeats slow drains',
   },
 
   // === ATTACKER MOVES ===
@@ -297,7 +351,7 @@ export const MOVES = {
     effect: { target: 'enemy', stat: 'atk', stages: -1 },
     statusInflict: 'PANIC',
     description: 'Inflict panic. Drops target ATK.',
-    realMeaning: 'Artificial urgency bypasses rational thought. Real agencies never give 24-hour deadlines via SMS.',
+    realMeaning: 'Artificial urgency bypasses rational thinking. Real agencies never give 24-hour deadlines via SMS — they send formal letters with weeks of lead time.',
   },
   sender_id_spoof: {
     id: 'sender_id_spoof',
@@ -307,7 +361,7 @@ export const MOVES = {
     power: 75,
     pp: 10,
     description: 'Impersonate a trusted source.',
-    realMeaning: 'Scammers spoof official sender IDs like IRAS or OCBC to appear legitimate.',
+    realMeaning: 'Scammers spoof legitimate sender IDs like \'IRAS\' or \'OCBC\' to appear official. Singapore\'s IMDA Sender ID Registry can verify, but most people don\'t check.',
   },
   thread_injection: {
     id: 'thread_injection',
@@ -319,7 +373,7 @@ export const MOVES = {
     effect: { target: 'enemy', stat: 'def', stages: -1 },
     statusInflict: 'DECEIVED',
     description: 'Inject into trusted threads. Drops DEF. Inflicts DECEIVED.',
-    realMeaning: 'Scammers insert phishing SMS into existing legitimate bank message threads.',
+    realMeaning: 'Scammers inject phishing SMS into existing legitimate bank message threads. This is the exact OCBC 2021 attack pattern that stole S$13.7 million.',
   },
   ocbc_phish: {
     id: 'ocbc_phish',
@@ -329,7 +383,7 @@ export const MOVES = {
     power: 110,
     pp: 5,
     description: 'Signature OCBC phishing attack. High damage.',
-    realMeaning: 'The IRAS-style refund scam: specific amount, urgency, click-link to verify. Pure fiction.',
+    realMeaning: 'Specific dollar amounts feel legitimate. Real IRAS refunds go through MyTax Portal — they never include clickable SMS links to \'claim\' a refund.',
   },
   voice_clone: {
     id: 'voice_clone',
@@ -340,7 +394,7 @@ export const MOVES = {
     pp: 8,
     statusInflict: 'DECEIVED',
     description: 'Clone a trusted voice to deceive. May inflict DECEIVED.',
-    realMeaning: 'Modern scams use AI to clone voices of relatives claiming emergencies.',
+    realMeaning: 'Modern scams use AI to clone voices of relatives claiming emergencies. The voice sounds real because it IS real — just recombined by AI.',
   },
   deepfake_video: {
     id: 'deepfake_video',
@@ -350,7 +404,7 @@ export const MOVES = {
     power: 95,
     pp: 5,
     description: 'Generate convincing fake video.',
-    realMeaning: 'Fake videos of celebrities or officials promoting investment schemes.',
+    realMeaning: 'Fake videos of celebrities or officials promoting investment schemes. If it sounds too good to be true and the celebrity is selling it, it\'s fake.',
   },
   pretext_call: {
     id: 'pretext_call',
@@ -362,7 +416,7 @@ export const MOVES = {
     effect: { target: 'enemy', stat: 'def', stages: -1 },
     statusInflict: 'DECEIVED',
     description: 'Establish false pretext. Drops DEF. Inflicts DECEIVED.',
-    realMeaning: 'Cold callers claim to be from your bank, ask you to verify your details.',
+    realMeaning: 'Cold callers claim to be from your bank, then ask you to \'verify\' your details. Real banks never call to ask you to confirm what they already know.',
   },
   gaslight: {
     id: 'gaslight',
@@ -373,7 +427,7 @@ export const MOVES = {
     pp: 8,
     statusInflict: 'TRIGGERED',
     description: 'Make the target doubt reality. May inflict TRIGGERED.',
-    realMeaning: 'False authority claims — manufactured debts to create panic and compliance.',
+    realMeaning: 'False authority claims manufactured debts to create panic. Real IRAS sends formal letters first — never SMS demands for immediate payment.',
   },
   pile_on: {
     id: 'pile_on',
@@ -383,7 +437,7 @@ export const MOVES = {
     power: 90,
     pp: 5,
     description: 'Coordinate mass harassment.',
-    realMeaning: 'Malicious Android apps that drain bank accounts once installed.',
+    realMeaning: 'Malicious Android apps that drain bank accounts once installed. Only install apps from the official Play Store or App Store — never from SMS links.',
   },
   doxxing_threat: {
     id: 'doxxing_threat',
@@ -395,7 +449,7 @@ export const MOVES = {
     effect: { target: 'enemy', stat: 'spd', stages: -1 },
     statusInflict: 'DOXXED',
     description: 'Threaten to expose personal info. Drops SPD. Inflicts DOXXED.',
-    realMeaning: 'Sextortion and image-based threats — scammers claim to have compromising content.',
+    realMeaning: 'Sextortion and image-based threats — scammers claim to have compromising content. In reality, they usually have nothing.',
   },
   threats: {
     id: 'threats',
@@ -405,7 +459,7 @@ export const MOVES = {
     power: 85,
     pp: 8,
     description: 'Direct intimidation.',
-    realMeaning: 'Fake police impersonation — claims of money laundering or drug allegations.',
+    realMeaning: 'Fake police impersonation claims of money laundering or drug allegations. Real SPF investigations never start with a phone call demanding money.',
   },
   extortion: {
     id: 'extortion',
@@ -415,7 +469,7 @@ export const MOVES = {
     power: 100,
     pp: 5,
     description: 'Demand payment under threat.',
-    realMeaning: 'Fake immigration officials threaten deportation unless you transfer money.',
+    realMeaning: 'Fake immigration officials threaten deportation unless you transfer money. ICA never resolves visa issues over phone or via PayNow transfers.',
   },
   // SingHealth Breach APT moves
   lateral_movement: {
@@ -427,7 +481,7 @@ export const MOVES = {
     pp: 5,
     effect: { target: 'self', stat: 'atk', stages: 2 },
     description: 'Move silently through the network. Sharply raises ATK.',
-    realMeaning: 'APT attackers move silently between systems to escalate privileges.',
+    realMeaning: 'APT attackers move silently between systems to escalate privileges. The SingHealth breach went undetected for weeks.',
   },
   data_exfiltration: {
     id: 'data_exfiltration',
@@ -438,7 +492,7 @@ export const MOVES = {
     pp: 3,
     statusInflict: 'DOXXED',
     description: 'Extract sensitive data. Devastating damage. May inflict DOXXED.',
-    realMeaning: 'Mass data theft — the SingHealth breach pattern where millions of records were copied.',
+    realMeaning: 'Mass data theft — the SingHealth breach pattern where 1.5 million patient records including the PM\'s were stolen.',
   },
   panic_pressure: {
     id: 'panic_pressure',
@@ -450,6 +504,6 @@ export const MOVES = {
     effect: { target: 'enemy', stat: 'atk', stages: -1 },
     statusInflict: 'PANIC',
     description: 'Apply extreme pressure. Drops ATK. Inflicts PANIC.',
-    realMeaning: 'Pressuring victims to transfer investigation money through their account.',
+    realMeaning: 'Pressuring victims to transfer \'investigation money\' through their account. This makes them legally complicit — never agree to receive funds from strangers.',
   },
 };

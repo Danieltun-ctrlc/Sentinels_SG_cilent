@@ -982,7 +982,7 @@
   overflow: hidden;
 }
 
-/* Move info panel — compact inspector */
+/* Move info panel — educational focus */
 .battle__move-info {
   background:
     repeating-linear-gradient(135deg, transparent, transparent 3px, rgba(255,255,255,0.006) 3px, rgba(255,255,255,0.006) 4px),
@@ -994,12 +994,33 @@
   gap: 5px;
   flex: 1;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
   box-shadow:
     inset 1px 1px 0 rgba(255,255,255,0.05),
     inset -1px -1px 0 rgba(0,0,0,0.4),
     0 0 12px rgba(0, 217, 255, 0.15);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.battle__move-info--visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: moveInfoAppear 0.15s ease forwards;
+}
+
+@keyframes moveInfoAppear {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .battle__move-info--visible {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .battle__move-info::before,
@@ -1029,6 +1050,8 @@
   justify-content: center;
   border-color: var(--color-border);
   box-shadow: none;
+  opacity: 1;
+  transform: none;
 }
 
 .battle__move-info-hint {
@@ -1040,12 +1063,26 @@
   line-height: 2;
 }
 
+.battle__move-info-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .battle__move-info-name {
   font-family: var(--font-header);
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
   letter-spacing: 1px;
   text-shadow: 0 0 8px var(--move-type-color, #00D9FF);
+}
+
+.battle__move-info-pp {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
 .battle__move-info-badges {
@@ -1057,18 +1094,18 @@
 
 .battle__move-info-type-badge {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: 1px;
-  padding: 3px 7px;
+  padding: 2px 6px;
   border: 1px solid var(--move-type-color, #00D9FF);
   color: var(--move-type-color, #00D9FF);
 }
 
 .battle__move-info-cat-badge {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: 1px;
-  padding: 3px 7px;
+  padding: 2px 6px;
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
 }
@@ -1078,16 +1115,79 @@
 
 .battle__move-info-stat-inline {
   font-family: var(--font-mono);
-  font-size: 13px;
-  color: #00D9FF;
+  font-size: 11px;
+  color: var(--color-text-muted);
   letter-spacing: 0.5px;
 }
 
 .battle__move-info-desc {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--color-text-muted);
+  line-height: 1.3;
+  font-style: italic;
+}
+
+/* Glowing divider separating mechanics from education */
+.battle__move-info-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--move-type-color, var(--color-cyan)), transparent);
+  box-shadow: 0 0 4px var(--move-type-color, var(--color-cyan));
+  margin: 4px 0;
+  opacity: 0.6;
+}
+
+/* Educational section — MOST PROMINENT */
+.battle__move-info-edu {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.battle__move-info-edu-label {
+  font-family: var(--font-header);
+  font-size: 9px;
+  color: var(--color-gold, #FFD700);
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+}
+
+.battle__move-info-edu-text {
+  font-size: 13px;
+  color: var(--color-amber, #FFB800);
   line-height: 1.4;
   font-style: italic;
+  font-weight: 500;
+}
+
+/* Call-to-action — second most prominent */
+.battle__move-info-action {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.battle__move-info-action-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--color-text-muted);
+  letter-spacing: 1px;
+}
+
+.battle__move-info-action-text {
+  font-family: var(--font-header);
+  font-size: 14px;
+  color: var(--move-type-color, var(--color-cyan));
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 8px var(--move-type-color, rgba(0, 217, 255, 0.5));
+  font-weight: 700;
+}
+
+/* Scam counter line */
+.battle__move-info-counter {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
 }
 
 .battle__move-info-meaning-text {

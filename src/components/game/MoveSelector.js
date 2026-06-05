@@ -1,4 +1,5 @@
 import { MOVES } from '../../data/moves';
+import { getTypeDisplayName } from '../../data/typePersonality';
 import { playMoveSelect } from '../../utils/synthSounds';
 import './MoveSelector.css';
 
@@ -11,17 +12,6 @@ const TYPE_COLORS = {
   illusion: '#9333EA',
   toxic: '#A3E635',
   coercion: '#F97316',
-};
-
-const TYPE_LABELS = {
-  logic: 'LOGIC',
-  forensic: 'FORENSIC',
-  network: 'NETWORK',
-  armor: 'ARMOR',
-  phantom: 'PHANTOM',
-  illusion: 'ILLUSION',
-  toxic: 'TOXIC',
-  coercion: 'COERCION',
 };
 
 export default function MoveSelector({ moves, pp, onSelect, disabled, onHover }) {
@@ -49,7 +39,7 @@ export default function MoveSelector({ moves, pp, onSelect, disabled, onHover })
             className={classes}
             onClick={() => { playMoveSelect(); onSelect(moveId); }}
             onMouseEnter={() => onHover && onHover(moveId)}
-            onMouseLeave={() => onHover && onHover(null)}
+            onFocus={() => onHover && onHover(moveId)}
             disabled={disabled || isEmpty}
             style={{ '--type-color': color, '--type-glow': `${color}40` }}
           >
@@ -65,9 +55,15 @@ export default function MoveSelector({ moves, pp, onSelect, disabled, onHover })
               <div className="move-selector__top-row">
                 <span className="move-selector__name">{move.name}</span>
                 <span className="move-selector__type-badge" style={{ background: `${color}22`, borderColor: `${color}66`, color }}>
-                  {TYPE_LABELS[move.type] || move.type.toUpperCase()}
+                  {getTypeDisplayName(move.type)}
                 </span>
               </div>
+              {/* Educational tagline — the real-world action */}
+              {move.defensiveAction && (
+                <span className="move-selector__tagline" style={{ color }}>
+                  🛡️ {move.defensiveAction}
+                </span>
+              )}
               <div className="move-selector__bottom-row">
                 <span className="move-selector__category">
                   <span className={`move-selector__cat-dot move-selector__cat-dot--${move.category}`}></span>

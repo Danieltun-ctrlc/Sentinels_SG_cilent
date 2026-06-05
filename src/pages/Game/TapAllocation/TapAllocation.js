@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CREATURES } from '../../../data/creatures';
 import { MOVES } from '../../../data/moves';
 import { ABILITIES } from '../../../data/abilities';
+import { getTypeDisplayName } from '../../../data/typePersonality';
 import { calculateStat, TAP_LIMITS } from '../../../engine/statCalculator';
 import { useAuth } from '../../../context/AuthContext';
 import gameService from '../../../services/gameService';
@@ -185,7 +186,7 @@ export default function TapAllocation() {
               onClick={() => setSelectedId(c.creature_id)}
             >
               <span className="tap__squad-name">{def?.name || c.creature_id}</span>
-              <span className="tap__squad-type">{def?.type?.toUpperCase()}</span>
+              <span className="tap__squad-type">{getTypeDisplayName(def?.type)}</span>
               <span className="tap__squad-tap">{totalInv} / {TAP_LIMITS.perCreature} TAP</span>
               <span className="tap__squad-level">Lv. {c.level || 1}</span>
             </div>
@@ -208,7 +209,7 @@ export default function TapAllocation() {
               )}
             </div>
             <h3 className="tap__creature-name">{creatureDef?.name?.toUpperCase()}</h3>
-            <span className="tap__creature-meta">{creatureDef?.type?.toUpperCase()} · Lv. {uc.level || 1}</span>
+            <span className="tap__creature-meta">{getTypeDisplayName(creatureDef?.type)} · Lv. {uc.level || 1}</span>
             <span className="tap__creature-ability">Ability: {ABILITIES[detail.activeAbility]?.name || detail.activeAbility}</span>
           </div>
 
@@ -308,7 +309,7 @@ export default function TapAllocation() {
                     <span className="tap__move-name">{move.name.toUpperCase()}</span>
                     {isEquipped && <span className="tap__move-dot"></span>}
                   </div>
-                  <span className="tap__move-meta">{move.type} · {move.category} · PP {move.pp}</span>
+                  <span className="tap__move-meta">{getTypeDisplayName(move.type)} · {move.category} · PP {move.pp}</span>
                 </div>
               );
             })}
