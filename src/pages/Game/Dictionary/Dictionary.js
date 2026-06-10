@@ -75,7 +75,7 @@ export default function Dictionary() {
           <div className="dict__chart-legend">
             <span className="dict__legend-item dict__legend-item--super">● 2× SUPER EFFECTIVE</span>
             <span className="dict__legend-item dict__legend-item--neutral">● 1× NEUTRAL</span>
-            <span className="dict__legend-item dict__legend-item--resist">● 0.5× NOT VERY EFFECTIVE</span>
+            <span className="dict__legend-item dict__legend-item--resist">● 0× NO EFFECT</span>
           </div>
 
           <div className="dict__chart-scroll">
@@ -104,7 +104,7 @@ export default function Dictionary() {
                           onMouseEnter={() => setHoveredCell({ atk: atkType, def: defType, eff })}
                           onMouseLeave={() => setHoveredCell(null)}
                         >
-                          {eff === 1 ? '1×' : eff >= 2 ? '2×' : '½'}
+                          {eff === 1 ? '1×' : eff >= 2 ? '2×' : eff === 0 ? '0×' : '½'}
                         </td>
                       );
                     })}

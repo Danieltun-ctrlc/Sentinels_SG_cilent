@@ -245,9 +245,13 @@ export default function Battle() {
     // Show messages
     const msgs = [];
     msgs.push(`${newState.enemy.name} used ${enemyMove?.name || 'an attack'}!`);
-    if (newState.lastAction?.damage > 0) msgs.push(`${getActivePlayer(newState).name} took ${newState.lastAction.damage} damage!`);
+    if (newState.lastAction?.effectiveness === 0) {
+      msgs.push("It has no effect!");
+    } else if (newState.lastAction?.damage > 0) {
+      msgs.push(`${getActivePlayer(newState).name} took ${newState.lastAction.damage} damage!`);
+    }
     if (newState.lastAction?.effectiveness >= 2) msgs.push("It's super effective!");
-    if (newState.lastAction?.effectiveness < 1) msgs.push("It's not very effective...");
+    if (newState.lastAction?.effectiveness < 1 && newState.lastAction?.effectiveness > 0) msgs.push("It's not very effective...");
     // Educational dialogue
     const eduMsg = getEffectivenessDialogue(enemyMove?.type, getActivePlayer(newState).type, newState.lastAction?.effectiveness || 1, enemyMoveId);
     if (eduMsg) msgs.push(eduMsg);
@@ -325,7 +329,8 @@ export default function Battle() {
     }
     if (newState.lastAction?.isCrit) { playCriticalHit(); setScreenShake(true); setTimeout(() => setScreenShake(false), 300); }
     if (newState.lastAction?.effectiveness >= 2) { playSuperEffective(); setEffectText('SUPER EFFECTIVE!'); setTimeout(() => setEffectText(null), 1200); }
-    if (newState.lastAction?.effectiveness < 1 && newState.lastAction?.damage > 0) { setEffectText('NOT VERY EFFECTIVE...'); setTimeout(() => setEffectText(null), 1200); }
+    if (newState.lastAction?.effectiveness < 1 && newState.lastAction?.effectiveness > 0 && newState.lastAction?.damage > 0) { setEffectText('NOT VERY EFFECTIVE...'); setTimeout(() => setEffectText(null), 1200); }
+    if (newState.lastAction?.effectiveness === 0) { setEffectText('NO EFFECT!'); setTimeout(() => setEffectText(null), 1200); }
 
     await delay(500);
     setEnemyHit(false);
@@ -334,6 +339,10 @@ export default function Battle() {
     playerMsgs.push(`${getActivePlayer(newState).name} used ${move?.name || moveId}!`);
     if (newState.lastAction?.missed) {
       playerMsgs.push(`${getActivePlayer(newState).name} is DECEIVED and missed!`);
+    } else if (newState.lastAction?.effectiveness === 0) {
+      playerMsgs.push("It has no effect!");
+      const eduDialogue = getEffectivenessDialogue(move?.type, newState.enemy.type, newState.lastAction.effectiveness, moveId);
+      if (eduDialogue) playerMsgs.push(eduDialogue);
     } else if (newState.lastAction?.damage > 0) {
       playerMsgs.push(`${newState.enemy.name} took ${newState.lastAction.damage} damage!`);
       if (newState.lastAction?.effectiveness >= 2) playerMsgs.push("It's super effective!");
@@ -428,6 +437,10 @@ export default function Battle() {
     enemyMsgs.push(`${currentState.enemy.name} used ${enemyMove?.name || enemyMoveId || 'an attack'}!`);
     if (enemyState.lastAction?.missed) {
       enemyMsgs.push(`${currentState.enemy.name} is DECEIVED and missed!`);
+    } else if (enemyState.lastAction?.effectiveness === 0) {
+      enemyMsgs.push("It has no effect!");
+      const eduDialogue = getEffectivenessDialogue(enemyMove?.type, activePlayer.type, enemyState.lastAction.effectiveness, enemyMoveId);
+      if (eduDialogue) enemyMsgs.push(eduDialogue);
     } else if (enemyState.lastAction?.damage > 0) {
       enemyMsgs.push(`${activePlayer.name} took ${enemyState.lastAction.damage} damage!`);
       if (enemyState.lastAction?.effectiveness >= 2) enemyMsgs.push("It's super effective!");
