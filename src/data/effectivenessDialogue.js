@@ -141,8 +141,12 @@ export function getEffectivenessDialogue(moveType, defenderType, effectiveness, 
   }
   if (effectiveness < 1) {
     if (moveType === 'armor' && defenderType === 'phantom') return '🎓 Technical defenses alone fail against social engineering — the human is the target, not the system.';
-    if (moveType === 'logic' && defenderType === 'toxic') return '🎓 Logic alone cannot counter emotional manipulation.';
-    if (moveType === 'logic' && defenderType === 'coercion') return '🎓 Critical thinking fails under extreme fear and pressure.';
+    if (moveType === 'logic' && defenderType === 'toxic') return '🎓 Logic alone cannot counter emotional manipulation — trolls exploit feelings, not reason.';
+    if (moveType === 'logic' && defenderType === 'coercion') return '🎓 Critical thinking fails under extreme fear and pressure — panic overrides logic.';
+    if (moveType === 'phantom' && defenderType === 'forensic') return '🎓 Impersonation fails against The Investigator — every fake identity has verifiable flaws.';
+    if (moveType === 'illusion' && defenderType === 'forensic') return '🎓 Deepfakes and illusions collapse under forensic inspection — metadata never lies.';
+    if (moveType === 'toxic' && defenderType === 'armor') return '🎓 Malware and manipulation bounce off hardened defenses — 2FA and Money Lock cannot be socially engineered.';
+    if (moveType === 'coercion' && defenderType === 'network') return '🎓 Coercion fails against The Sentinel — community support and reporting breaks the isolation scammers need.';
   }
 
   return null;
