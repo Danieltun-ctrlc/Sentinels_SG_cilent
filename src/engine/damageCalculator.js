@@ -42,8 +42,9 @@ export function calculateDamage(attacker, defender, move) {
   // Status modifier (DOXXED = +25% incoming damage)
   const statusMult = getDamageMultiplierFromStatus(defender);
 
-  // Final
-  const damage = Math.max(1, Math.floor(base * stab * effectiveness * random * crit * statusMult));
+  // Final — if effectiveness is 0, damage is 0 (no effect)
+  const raw = Math.floor(base * stab * effectiveness * random * crit * statusMult);
+  const damage = effectiveness === 0 ? 0 : Math.max(1, raw);
 
   return { damage, effectiveness, isCrit };
 }
