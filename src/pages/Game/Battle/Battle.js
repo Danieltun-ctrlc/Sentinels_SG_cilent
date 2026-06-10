@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { initBattle, executePlayerMove, executeEnemyAI, isBattleOver, swapCreature, canSwap, getActivePlayer } from '../../../engine/battleEngine';
 import { getEffectivenessDialogue } from '../../../data/effectivenessDialogue';
+import { getDefeatHints } from '../../../data/defeatHints';
 import { MISSIONS } from '../../../data/missions';
 import { CREATURES } from '../../../data/creatures';
 import MoveSelector from '../../../components/game/MoveSelector';
@@ -39,6 +40,7 @@ export default function Battle() {
   const [damageNum, setDamageNum] = useState(null);
   const [effectText, setEffectText] = useState(null);
   const [showVictory, setShowVictory] = useState(false);
+  const [showDefeat, setShowDefeat] = useState(false);
   const [battleEffect, setBattleEffect] = useState(null);
   const [dialogueText, setDialogueText] = useState('');
   const [awaitingClick, setAwaitingClick] = useState(false);
@@ -265,8 +267,7 @@ export default function Battle() {
       await delay(800);
       playDefeat();
       await showAndWait('Mission failed...');
-      await delay(500);
-      navigate('/game/campaign');
+      setShowDefeat(true);
       return;
     }
 
@@ -463,7 +464,7 @@ export default function Battle() {
       setPlayerFainted(true); playFaint(); await delay(800);
       await showAndWait(`${activePlayer.name} fainted!`);
       playDefeat(); await showAndWait('All creatures have fainted... Mission failed.');
-      await delay(500); navigate('/game/campaign'); return;
+      setShowDefeat(true); return;
     }
 
     if (creatureChanged) {
@@ -541,7 +542,7 @@ export default function Battle() {
       setPlayerFainted(true); playFaint(); await delay(800);
       await showAndWait(`${activePlayer.name} fainted!`);
       playDefeat(); await showAndWait('All creatures fainted... Mission failed.');
-      await delay(500); navigate('/game/campaign'); return null;
+      setShowDefeat(true); return null;
     }
 
     if (creatureChanged) {
@@ -591,6 +592,49 @@ export default function Battle() {
           <span className="battle__victory-text">VICTORY</span>
         </div>
       )}
+
+      {/* Defeat overlay with hints */}
+      {showDefeat && (() => {
+        const hints = getDefeatHints(battleState?.enemy?.creatureId);
+        return (
+          <div className="battle__defeat-overlay">
+            <span className="battle__defeat-title">MISSION FAILED</span>
+            <p className="battle__defeat-subtitle">Your squad was defeated by {hints?.enemyName || 'the enemy'}.</p>
+
+            {hints && (
+              <div className="battle__defeat-hints">
+                <h3 className="battle__defeat-hints-title">🎓 STRATEGY HINTS</h3>
+
+                {hints.tips.map((tip, i) => (
+                  <p key={i} className="battle__defeat-tip">{tip}</p>
+                ))}
+
+                {hints.superEffective.length > 0 && (
+                  <div className="battle__defeat-section">
+                    <span className="battle__defeat-label">✅ SUPER EFFECTIVE AGAINST {hints.enemyName.toUpperCase()}:</span>
+                    {hints.superEffective.map(t => (
+                      <span key={t.type} className="battle__defeat-recommend">{t.displayName} — {t.creatures.join(', ')}</span>
+                    ))}
+                  </div>
+                )}
+
+                {hints.noEffect.length > 0 && (
+                  <div className="battle__defeat-section">
+                    <span className="battle__defeat-label">❌ NO EFFECT (AVOID):</span>
+                    {hints.noEffect.map(t => (
+                      <span key={t.type} className="battle__defeat-avoid">{t.displayName} — {t.creatures.join(', ')}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <button className="battle__defeat-btn" onClick={() => navigate('/game/campaign')}>
+              RETURN TO CAMPAIGN
+            </button>
+          </div>
+        );
+      })()}
 
       {/* TOP BAR */}
       <div className="battle__topbar">
@@ -842,8 +886,8 @@ export default function Battle() {
                     // Check if game over (all fainted)
                     const swapResult = isBattleOver(es);
                     if (swapResult === 'LOSS') {
-                      playDefeat(); await showAndWait('All creatures fainted... Mission failed.'); await delay(500);
-                      navigate('/game/campaign'); return;
+                      playDefeat(); await showAndWait('All creatures fainted... Mission failed.');
+                      setShowDefeat(true); return;
                     }
 
                     // Show the next creature entering
@@ -858,8 +902,8 @@ export default function Battle() {
                     if (swapResult === 'LOSS') {
                       setPlayerFainted(true); playFaint(); await delay(800);
                       await showAndWait(`${getActivePlayer(es).name} fainted!`);
-                      playDefeat(); await showAndWait('All creatures fainted... Mission failed.'); await delay(500);
-                      navigate('/game/campaign'); return;
+                      playDefeat(); await showAndWait('All creatures fainted... Mission failed.');
+                      setShowDefeat(true); return;
                     }
                   }
 
