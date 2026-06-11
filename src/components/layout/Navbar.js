@@ -15,7 +15,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar__inner">
         <Link to={user ? '/home' : '/'} className="navbar__logo">
-          <span className="navbar__logo-text">SENTINEL SG</span>
+          <span className="navbar__logo-text">DEFENSOR SG</span>
         </Link>
 
         <div className="navbar__center">

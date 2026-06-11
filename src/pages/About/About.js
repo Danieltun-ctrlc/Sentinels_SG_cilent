@@ -10,7 +10,7 @@ export default function About() {
 
       <div className="about__section">
         <p className="about__text">
-          Sentinel SG is a three-pillar cyber-resilience platform built for CODE_EXP 2026.
+          Defensor SG is a three-pillar cyber-resilience platform built for CODE_EXP 2026.
           Our mission: turn young Singaporeans into active online protectors.
         </p>
       </div>

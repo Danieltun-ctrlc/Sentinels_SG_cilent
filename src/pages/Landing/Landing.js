@@ -20,7 +20,7 @@ export default function Landing() {
 
         {/* Logo */}
         <div className="landing__logo-container">
-          <img src="/assets/logo/logo.png" alt="Sentinel SG" className="landing__logo-img" />
+          <img src="/assets/logo/logo.png" alt="Defensor SG" className="landing__logo-img" />
         </div>
 
         {/* Motto */}
